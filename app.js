@@ -1,17 +1,29 @@
 var createError = require('http-errors');
 var express = require('express');
+var fileUpload = require('express-fileupload');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var uploadRouter = require('./routes/upload');
+var parserRouter = require('./routes/parser');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// enable files upload
+app.use(fileUpload({
+    createParentPath: true
+}));
+
+//allow CORS
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/upload', uploadRouter);
+app.use('/parser', parserRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
