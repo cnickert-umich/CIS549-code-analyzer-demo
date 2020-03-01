@@ -1,17 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+
 router.post('/js', async (req, res) => {
   try {
     if (!req.files) {
-      res.send({
-        status: false,
-        message: 'No files uploaded'
+      res.status(400).send({
+        message: 'JavaScript Files are required. [jsFiles]'
       });
     } else if (!req.body || !req.body.extName) {
-      res.send({
-        status: false,
-        message: 'Extention name is required.'
+      res.status(400).send({
+        message: 'Extention name is required. [extName]'
       });
     } else {
       //Get the files and if they only upload one, lets throw it into an array anyways
@@ -30,7 +29,6 @@ router.post('/js', async (req, res) => {
       for (let i = 0; i < jsFiles.length; i++) {
         let jsFile = jsFiles[i];
         //Only allow .js files to be uploaded
-        console.log("file: ", jsFile);
         let isJsFile = jsFile.mimetype == 'application/javascript';
         if (isJsFile) {
           let fileName = jsFile.name;
@@ -39,15 +37,21 @@ router.post('/js', async (req, res) => {
         }
       }
 
-      //send response
+      if (fileNames.length == 0) {
+        res.status(400).send({
+          message: 'No JavaScript files detected in request.'
+        });
+      }
+
+      //send successful response
       res.send({
-        status: true,
         message: 'JavaScript Files uploaded',
         data: {
           filesUploaded: fileNames,
           uploadFolder: uploadFolder
         }
       });
+
     }
   } catch (err) {
     res.status(500).send(err);
