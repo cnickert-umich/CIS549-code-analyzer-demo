@@ -1,5 +1,5 @@
 ## Requirements
-Download Node & npm [https://nodejs.org/en/download](Node)
+Download [Node & npm](https://nodejs.org/en/download)
 
 ## Available Scripts
 
