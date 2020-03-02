@@ -1,5 +1,5 @@
 ## Requirements
-[https://nodejs.org/en/download/](Node & npm)
+Download [https://nodejs.org/en/download](Node & npm)
 
 ## Available Scripts
 
@@ -19,15 +19,15 @@ After the server has been started, you can call various APIs.
 ### `POST` /parser/js
 Description: Generates a parse tree for each JavaScript file within the given extention folder
 
-application/form-data
-body:
-    extName (String)
+application/form-data<br />
+body:<br />
+    extName (String)<br />
 
 ### `POST` /upload/js
 Description: Uploads JavaScript files into a folder hosted on the server.
 
-application/form-data
-body:
-    jsFiles (.js files)
-    extName (String)
+application/form-data<br />
+body:<br />
+    jsFiles (.js files)<br />
+    extName (String)<br />
 
