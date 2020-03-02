@@ -1,3 +1,5 @@
+## Requirements
+[https://nodejs.org/en/download/](Node & npm)
 
 ## Available Scripts
 
